@@ -19,11 +19,12 @@ The structure of the HCACE is as follows:
 
 * HCACE.py: Python code for the HCACE scheme.
 
-* testHCACE.py: Python code to run "HCACE.py" under a simple example. In our paper, we need to run the sender sanitization and receiver sanitization of HCACE in TEE. To simplify the experiment, we just run the whole HCACE scheme in TEE (SGX is actually used) and record the time spent on sender sanitization and receiver sanitization. You can see how to run the code in SGX in [Run in SGX](#run-in-sgx). For the same reason, we record the running time of all algorithms except sender sanitization and receiver sanitization in the experiment by running the following command:
-    ```
-    python testHCACE.py # cd into ./HCACE before
-    ```
-* ./ooclum-HACE: The code to run the HCACE sheme in SGX.
+* testHCACE.py: Python code to run "HCACE.py" under a simple example. 
+    * Run in SGX: In our paper, we need to run the sender sanitization and receiver sanitization of HCACE in TEE. To simplify the experiment, we just run the whole HCACE scheme in TEE (SGX is actually used) and record the time spent on sender sanitization and receiver sanitization. You can see how to run the code in SGX in [Run in SGX](#run-in-sgx).
+
+    * Run in normal world: For the same reason, in the experiment we record the running time of all algorithms except sender sanitization and receiver sanitization when we run this code in normal world.
+
+* ./ooclum-HACE: The code to run HCACE in SGX.
 
 ## Run in SGX
 The following are the steps to run HCACE in SGX (note that your machine need to support Intel SGX):
