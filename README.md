@@ -15,21 +15,21 @@ We tested in Ubuntu 22.04 in the following environment:
 
 ## Scheme
 The structure of the HCACE is as follows:
-* /build_blocks: Building blocks for implementing HCACE.
+* ./build_blocks: Building blocks for implementing HCACE.
 
 * HCACE.py: Python code for the HCACE scheme.
 
-* testHCACE.py: Python code to run "HCACE.py" under a simple example. In our paper, we need to run the sender sanitization and receiver sanitization of HCACE in TEE. To simplify the experiment, we just run the whole HCACE scheme in TEE (SGX is actually used) and record the time spent on sender sanitization and receiver sanitization. You can see how to run the code in SGX in [Run in SGX](#run-in-sgx). For the same reason, we record the running time of all algorithms except sender sanitization and receiver sanitization in the experiment by running the following command.
+* testHCACE.py: Python code to run "HCACE.py" under a simple example. In our paper, we need to run the sender sanitization and receiver sanitization of HCACE in TEE. To simplify the experiment, we just run the whole HCACE scheme in TEE (SGX is actually used) and record the time spent on sender sanitization and receiver sanitization. You can see how to run the code in SGX in [Run in SGX](#run-in-sgx). For the same reason, we record the running time of all algorithms except sender sanitization and receiver sanitization in the experiment by running the following command:
     ```
-    python(3) ./testHCACE.py # cd into ./HCACE before
+    python testHCACE.py # cd into ./HCACE before
     ```
-* /ooclum-HACE: The code to run the HCACE sheme in SGX.
+* ./ooclum-HACE: The code to run the HCACE sheme in SGX.
 
 ## Run in SGX
 The following are the steps to run HCACE in SGX (note that your machine need to support Intel SGX):
-1. Follow the instructions of 01.Install Intel SGX and 02.Install Occlum in [guide](./guide.pdf) to install sgx and occlum.
+1. Follow the instructions of 01.Install Intel SGX and 02.Install Occlum in [guide](./guide.pdf) to install SGX and Occlum.
 
-2. Before you can run Python in Occlum, you also need to install a conda or miniconda(Refer to the 03.1 install minaconda with the following script in [guide](./guide.pdf)). Also we give out an example np and you can follow the instruction of 03.Run Python in Occlum in [guide](./guide.pdf) to run this example (the code is in folder ./occlum-HCACE/np).
+2. Before you can run Python in Occlum, you also need to install a conda or miniconda(Refer to the 03.1 install minaconda with the following script in [guide](./guide.pdf)). Also we give out an example np and you can follow the instruction of 03.Run Python in Occlum in [guide](./guide.pdf) to run this example (the code is under the folder ./occlum-HCACE/np).
 
 3. cd into ./occlum-HCACE
     ```
@@ -43,9 +43,9 @@ The following are the steps to run HCACE in SGX (note that your machine need to 
     ```
     ./build.sh
     ```
-6. run the script run.sh
+6. run the script run.sh and you can run the HCACE in SGX
     ```
     ./run.sh
     ```
-7. Then you can run the HCACE in SGX
+
 
