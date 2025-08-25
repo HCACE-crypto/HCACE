@@ -46,11 +46,11 @@ print("ct", ct)
 ctt_s = hcace.S_sanitization(pk, vk, ct, s_revocation_list)
 print("ctt_s: \n", ctt_s)
 
-ctt_r = hcace.R_sanitization(pk, vk, ctt_s)
+ctt_r = hcace.R_sanitization(pk, vk, ctt_s, dk["dk1"])
 print("ctt_r: ", ctt_r)
 
 
-msg = hcace.decrypt(pk, dk, ctt_r)
+msg = hcace.decrypt(pk, dk["dk2"], ctt_r)
 
 print("random msg: ", rand_msg)
 print("msg: ", msg)
