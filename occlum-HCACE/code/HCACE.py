@@ -85,7 +85,7 @@ class HCACE:
 
         return ctt
         
-    def R_sanitization(self, pk, vk, ctt):
+    def R_sanitization(self, pk, vk, ctt, dk1):
         ctt1 = ctt["ctt1"]
         Rand1 = ctt["Rand1"]
         ctt2 = ctt["ctt2"]
@@ -93,11 +93,22 @@ class HCACE:
 
         res_ctt = {}
 
-        res_ctt["ctt1"] = self.CD_ABACE.Sanitization(pk, vk, ctt1, Rand1)
+        cttt1 = self.CD_ABACE.Sanitization(pk, vk, ctt1, Rand1)
 
-        res_ctt["ctt2"] = self.CD_ABACE.Sanitization(pk, vk, ctt2, Rand2)
+        cttt2 = self.CD_ABACE.Sanitization(pk, vk, ctt2, Rand2)
 
         res_ctt["map"] = ctt["map"]
+
+        map_ct = ctt["map"]
+
+        msg1 = self.CD_ABACE.decrypt(pk, dk1, cttt1)
+        msg2 = self.CD_ABACE.decrypt(pk, dk1, cttt2)
+
+        if msg1 not in map_ct.keys() or msg2 not in map_ct.keys():
+            return None
+
+        res_ctt["msg1"] = msg1
+        res_ctt["msg2"] = msg2
 
         return res_ctt
 
@@ -105,26 +116,19 @@ class HCACE:
     def DecKGen2(self, r_list):
         return self.A_KP_ABE.keygen(transform_policy(r_list, self.ID_size))
     
-    def decrypt(self, pk, dk, ctt):
-        ctt1 = ctt["ctt1"]
-        ctt2 = ctt["ctt2"]
+    def decrypt(self, pk, dk2, ctt):
+        msg1 = ctt["msg1"]
+        msg2 = ctt["msg2"]
+
         map_ct = ctt["map"]
-
-        dk1 = dk["dk1"]
-        dk2 = dk["dk2"]
-
-        msg1 = self.CD_ABACE.decrypt(pk, dk1, ctt1)
-        msg2 = self.CD_ABACE.decrypt(pk, dk1, ctt2)
-
-        if msg1 not in map_ct.keys() or msg2 not in map_ct.keys():
-            return None
 
         se_key2GT = None 
         for key in map_ct.keys():
             if key != msg1 and key != msg2:
                 key_se2GT = key
-
+        
         key_se = self.A_KP_ABE.decrypt(map_ct[msg2], dk2, key_se2GT, self.ID_size)
+
         if key_se == key_se2GT:
             msg = self.SE.decrypt(map_ct[msg1]).decode('utf-8')
             return msg
