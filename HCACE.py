@@ -111,8 +111,7 @@ class HCACE:
         res_ctt["msg2"] = msg2
 
         return res_ctt
-
-        
+ 
     def DecKGen2(self, r_list):
         return self.A_KP_ABE.keygen(transform_policy(r_list, self.ID_size))
     
@@ -134,7 +133,3 @@ class HCACE:
             return msg
             
         return None
-        
-
-
-

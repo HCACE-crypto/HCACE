@@ -49,10 +49,8 @@ print("ctt_s: \n", ctt_s)
 ctt_r = hcace.R_sanitization(pk, vk, ctt_s, dk["dk1"])
 print("ctt_r: ", ctt_r)
 
-
 msg = hcace.decrypt(pk, dk["dk2"], ctt_r)
 
 print("random msg: ", rand_msg)
 print("msg: ", msg)
 print(msg == rand_msg)
-
